@@ -271,8 +271,12 @@ class BrausWindow(Gtk.ApplicationWindow):
             hbox.pack_start(browserEntryBox, True, True, 0)
 
     def keyboard_handle(self, widget, event, app):
-        index = int(Gdk.keyval_name(event.keyval)) - 1
-        self.launch_browser(index, app)
+        if Gdk.keyval_name(event.keyval) == "Escape":
+            # Close window
+            self.quitApp(self, app)
+        else:
+            index = int(Gdk.keyval_name(event.keyval)) - 1
+            self.launch_browser(index, app)
 
     # Function to actually launch the browser
     def browser_click_handle(self, target, index, app):
