@@ -207,23 +207,29 @@ class BrausWindow(Gtk.ApplicationWindow):
         # WARNING HACKY WAY
         new_browsers = []
         for index, browser in enumerate(self.browsers):
-            # swap firefox normal to first
-            print(browser.get_display_name())
-            if browser.get_display_name() == "Firefox Web Browser" and index > 0:
-                t = new_browsers[0]
-                new_browsers[0] = browser
-                new_browsers.append(t)
-            else:
-                new_browsers.append(browser)
+            #print(browser.get_display_name())
+            #print(browser.get_icon())
+            # discard any browsers with no icon
+            if browser.get_icon() is None:
+                continue
+            new_browsers.append(browser)
 
-        # WARNING hardcode here
-        # Would break if there are more installed browser
-        new_browsers[1] = new_browsers[3]
-        new_browsers.pop()
+        #    # swap firefox normal to first
+        #    if browser.get_display_name() == "Firefox Web Browser" and index > 0:
+        #        t = new_browsers[0]
+        #        new_browsers[0] = browser
+        #        new_browsers.append(t)
+        #    else:
+        #        new_browsers.append(browser)
 
-            # swap firefox developer to second
-        print(new_browsers)
-        print(browsers)
+        ## WARNING hardcode here
+        ## Would break if there are more installed browser
+        #new_browsers[1] = new_browsers[3]
+        #new_browsers.pop()
+
+        ## swap firefox developer to second
+        #print("new_browsers", new_browsers)
+        #print("browsers", browsers)
         self.browsers = new_browsers
 
         # Loop over the apps in the list of browsers
