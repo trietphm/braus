@@ -206,12 +206,20 @@ class BrausWindow(Gtk.ApplicationWindow):
 
         # WARNING HACKY WAY
         new_browsers = []
+        seen_executables = set()
         for index, browser in enumerate(self.browsers):
             #print(browser.get_display_name())
             #print(browser.get_icon())
             # discard any browsers with no icon
             if browser.get_icon() is None:
                 continue
+
+            executable = browser.get_executable()
+
+            if executable in seen_executables:
+                continue
+
+            seen_executables.add(executable)
             new_browsers.append(browser)
 
         #    # swap firefox normal to first
